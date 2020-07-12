@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Formulario from './components/Formulario'
 
 function App() {
   return (
-    <div className="App">ASD
-    </div>
+    <Fragment>
+      <Formulario />
+    </Fragment>
   );
 }
 
