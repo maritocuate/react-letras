@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Formulario from './components/Formulario'
 import Letra from './components/Letra'
+import Biografia from './components/Biografia'
 import axios from 'axios'
 
 function App() {
@@ -22,11 +23,11 @@ function App() {
       ])
 
       setLyrics(letra.data.lyrics)
-      setBiography(bio.data.artists[0].strBiographyEN)
+      setBiography(bio.data.artists[0])
     }
     callApiLyrics()
 
-  }, [values])
+  }, [values, biography])
 
   return (
     <Fragment>
@@ -35,6 +36,7 @@ function App() {
       <div className='container mt-5'>
         <div className='row'>
           <div className='col-md-6'>
+            <Biografia biography={biography}/>
           </div>
           <div className='col-md-6'>
             <Letra lyrics={lyrics}/>
