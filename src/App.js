@@ -7,16 +7,22 @@ function App() {
 
   const [values, setValues] = useState({})
   const [lyrics, setLyrics] = useState('')
+  const [biography, setBiography] = useState({})
 
   useEffect(()=>{
     if( Object.keys(values).length===0 ) return
 
     const callApiLyrics = async () => {
       const {artista, cancion} = values
-      const url = `https://api.lyrics.ovh/v1/${artista}/${cancion}`
-      const query = await axios(url)
+      const urlLyrics = `https://api.lyrics.ovh/v1/${artista}/${cancion}`
+      const urlBio = `https://www.theaudiodb.com/api/v1/json/1/search.php?s=${artista}`
 
-      setLyrics(query.data.lyrics)
+      const [letra, bio] = await Promise.all([
+        axios(urlLyrics), axios(urlBio)
+      ])
+
+      setLyrics(letra.data.lyrics)
+      setBiography(bio.data.artists[0].strBiographyEN)
     }
     callApiLyrics()
 
