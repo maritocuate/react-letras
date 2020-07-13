@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Formulario = () => {
+const Formulario = ({setValues}) => {
 
     const [search, setSearch] = useState({
         artista: '',
@@ -24,6 +24,7 @@ const Formulario = () => {
             setError(true)
         }else{
             setError(false)
+            setValues(search)
         }
     }
     
